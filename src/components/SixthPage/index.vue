@@ -8,7 +8,7 @@
       <span class="value"> {{ count }}次</span>
     </div>
     <div class="b">
-      <img src="@/assets/images/cy.png" />
+      <img src="@/assets/images/cy.jpg" />
     </div>
   </div>
 </template>
