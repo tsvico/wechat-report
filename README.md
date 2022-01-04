@@ -27,7 +27,7 @@ https://github.com/BlueMatthew/WechatExporter</del>
 >
 > 然后对安卓虚拟器进行root，这个也是设置里就有的，最后就能把三个文件都拷贝到电脑上了。
 
-使用备份方法导出`微信(com.tencent.mm).bak`，使用`7Z`直接打开此备份文件
+使用备份方法导出`微信(com.tencent.mm).bak`(在`/内部储存设备/MIUI/backup/ALLBackup/`目录下)，使用`7Z`直接打开此备份文件
 
 并且将
 
