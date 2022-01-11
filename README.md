@@ -10,28 +10,25 @@ IOS 转 原作者仓库 https://github.com/myth984/wechat-report
 
 MIUI 或其他能导出备份文件的 Android 系统继续往下看
 ## 导出微信聊天记录
-<del>参考如下教程
-https://github.com/BlueMatthew/WechatExporter</del>
-
-<del>将聊天记录生成txt</del>
-
 原作者提供方法不适用于Android系统
 
 
 
 > 其他手机通用做法
 >
-> 其他手机可能没有这么方便，一种办法是root之后去`/data/data/com.tencent.mm/MicroMsg`下面找这三个文件，但是很多人是不会去root的，所以介绍另一种方法。
+> 1. 其他手机（华为、vivo、oppo）如果可以导出微信备份，可以用解压缩工具尝试打开备份文件。
 >
-> 首先电脑上安装一款安卓模拟器，然后里面下载手机微信并登录，最重要的一步就是**将手机端聊天记录备份到电脑端微信，然后将电脑端聊天记录恢复到安卓虚拟器里的微信**，这个功能是微信自带的，应该没有什么难度。
+> 2. 如果有root可以去`/data/data/com.tencent.mm/MicroMsg`下面找这三个文件，但是很多人是不会去root的，所以介绍第三种方法。
 >
-> 然后对安卓虚拟器进行root，这个也是设置里就有的，最后就能把三个文件都拷贝到电脑上了。
+> 3. 首先电脑上安装一款安卓模拟器，然后里面下载手机微信并登录，最重要的一步就是**将手机端聊天记录备份到电脑端微信，然后将电脑端聊天记录恢复到安卓虚拟器里的微信**，这个功能是微信自带的，应该没有什么难度。然后对安卓虚拟器进行root，这个也是设置里就有的，最后就能把三个文件都拷贝到电脑上了。
 
-使用备份方法导出`微信(com.tencent.mm).bak`(在`/内部储存设备/MIUI/backup/ALLBackup/`目录下)，使用`7Z`直接打开此备份文件
+
+
+使用备份方法导出`微信(com.tencent.mm).bak`(在`/内部储存设备/MIUI/backup/ALLBackup/`目录下)，使用`7Z`(解压缩工具)直接打开此备份文件
 
 并且将
 
-`apps\com.tencent.mm\r\MicroMsg\systemInfo.cfg`、
+`apps\com.tencent.mm\r\MicroMsg\systemInfo.cfg`
 
 `apps\com.tencent.mm\r\MicroMsg\CompatibleInfo.cfg`
 
@@ -49,11 +46,9 @@ https://github.com/BlueMatthew/WechatExporter</del>
 
 需要自己有一个`MySQL`库 (没有的可以下载个`phpstudy`)
 
-<del>修改txt文件位置及两个人的昵称 执行入库代码 `python 入库.py`</del>
+默认具备一定`vue`/`mysql`知识
 
-默认具备一定vue/mysql知识
-
-然后打开`sqlcipher.exe`软件，用它打开`EnMicroMsg.db`数据库，输入得到的密码
+然后打开`bin\sqlcipher.exe`软件，用它打开`EnMicroMsg.db`数据库，输入得到的密码
 
 这里我是用先导出csv再导入mysql的方法，具体操作是
 
@@ -75,7 +70,9 @@ https://github.com/BlueMatthew/WechatExporter</del>
 
 ## 数据整理
 
-参见`analysis.sql`，注释写的很详细
+参见`bin\analysis.sql`，注释写的很详细，只需要在navicat软件或控制台里执行对应的SQL
+
+
 
 纯文字聊天记录的导出需要在mysql配置文件中添加`secure_file_priv=''`，并执行如下命令(OUTFILE后需要改为具体路径)
 
@@ -91,30 +88,17 @@ FROM message where type = 1;
 
 ## 分词 & 生成词云
 
-<del>将分词结果传入这个网站</del>
-
-<del>https://wordart.com/create</del>
-
-<del>上传宋体</del>
-
-<del>打开控制台执行</del>
-<del>`canvas = document.querySelector("#root > div > div.app-body > div.app-body-pane.app-body-right-pane > div.app-canvas-wrapper > a > canvas");canvas.toDataURL("image/png")`</del>
-
-<del>将生成的base64转为图片
-http://tool.chinaz.com/tools/imgtobase</del>
-
 使用 [微词云](https://www.weiciyun.com/fenci/)(免费版够用)，将导出的`ci.txt`上传，一步步生成词云
 
-放入`/src/asset/images/cy.png`
+放入`/src/asset/images/cy.jpg`
 
 ## 写入结果
 
 将结果手动写入`/src/data.json`
 
-## 根据男/女朋友的手机尺寸进行微调
-
-因为我技术不行不会适配各种移动端 如果有样式问题请根据女朋友的手机来微调css
 ## 生成html
+
+`npm i`
 
 `npm run build`
 
